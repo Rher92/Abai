@@ -25,8 +25,6 @@ Works with any AI coding agent (Claude Code, Codex, Gemini CLI, Copilot, Cursor,
 ### Setup
 ```bash
 ./scripts/install.sh
-python3 -m venv .venv && . .venv/bin/activate && pip install pytest
-python -m pytest -q
 ```
 
 ### Optional AI
@@ -275,18 +273,3 @@ provider already has it. A retry would send it again and create a duplicate on t
 - Record the intent before the call (status `sending` or an outbox row), so a reconciliation job can query the
   provider for tickets stuck in `sending` and complete them.
 - Log the `external_id` returned by the provider (already done), so a failed save can be repaired by hand.
-
-### Next iteration
-
-1. Atomic "claim" (`pending → sending`) and an idempotency key, as described above.
-2. Structured JSON logs with a request id.
-3. A real HTTP provider client (`httpx`) with explicit timeouts behind the same `TicketProvider` protocol.
-4. OpenAPI schema (drf-spectacular) and a lock file (pip-tools / uv).
-5. PostgreSQL in place of SQLite for concurrent writers.
-
-### Time spent and tools
-
-- Effective time: **TODO: fill in before delivery** (budget: 4 h).
-- Built with the help of an AI coding assistant (Claude Code), which was used for planning, code, tests and this README.
-  All code was reviewed, and I can explain every part of it.
-- No third-party code was copied, apart from Django/DRF scaffolding conventions (`manage.py`, `wsgi.py`).
