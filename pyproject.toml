@@ -1,0 +1,10 @@
+[project]
+name = "abai"
+version = "0.1.0"
+description = "AI-agnostic agent skills and a self-updating AGENTS.md memory hook"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+addopts = "-ra"

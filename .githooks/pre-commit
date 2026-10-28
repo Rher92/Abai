@@ -1,0 +1,12 @@
+#!/bin/sh
+# Rewrite .agents/AGENTS.md's auto-generated block and stage it, so every commit
+# carries fresh AI memory. Bypass once with: SKIP_AGENT_MEMORY=1 git commit ...
+[ "$SKIP_AGENT_MEMORY" = "1" ] && exit 0
+
+ROOT="$(git rev-parse --show-toplevel)"
+PYTHON="${PYTHON:-python3}"
+
+if ! "$PYTHON" "$ROOT/scripts/update_agent_memory.py" --root "$ROOT"; then
+  echo "pre-commit: failed to update .agents/AGENTS.md (set SKIP_AGENT_MEMORY=1 to bypass)" >&2
+  exit 1
+fi

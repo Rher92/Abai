@@ -1,0 +1,7 @@
+# Local SQLite database (created by `python manage.py migrate`)
+db.sqlite3
+db.sqlite3-journal
+
+# Local environment
+.venv/
+.env
